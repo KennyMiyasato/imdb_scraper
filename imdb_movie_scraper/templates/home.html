@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <img class="col s3 offset-s3 m4 l5" src="static/imdb-logo.png">
+        <img class="col s3 offset-s3 m4 l6" src="static/bs.png">
+        <form class="col s12" method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form.title(id="title", type="text", class="validate") }}
+                    {{ form.title.label(for="title", class="validate") }}
+                </div>
+                <div class="input-field col s6">
+                    {{ form.year(id="year", type="text", class="validate") }}
+                    {{ form.year.label(for="year", class="validate") }}
+                </div>
+            </div>
+            <div class="center-align">
+                <button class="btn waves-effect waves-light z-depth-5" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+        </form>
+        <h3>{{ year }}</h3>
+    </div>
+</div>
+{% endblock content %}

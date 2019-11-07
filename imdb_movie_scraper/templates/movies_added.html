@@ -4,7 +4,8 @@
 <div class="row">
         {% for index, row in df_movies.iterrows() %}
         <div class="col s3 m3">
-            <div class="card {{ color_choices.color_selected }} z-depth-5 hoverable">
+            <!-- <div class="card {{ color_choices.color_selected }} z-depth-5 hoverable"> -->
+            <div class="card {{ color_choices.sample().to_string().strip()[8:].strip() }} z-depth-5 hoverable">
                 <div class="card-image">
                     <img src={{ row['movie_poster_str'] }}>
                     <span class="card-title center-align truncate">{{ row['title'] }} ({{ row['year'] }})</span>

@@ -10,6 +10,16 @@ from imdb_movie_scraper.models import ImdbTitleYear
 import pandas as pd
 from random import choice
 
+color = [
+            "red darken-1","pink darken-1","purple darken-1","deep-purple darken-1",
+            "indigo darken-1","blue darken-1","light-blue darken-1","cyan darken-1",
+            "teal darken-1","green darken-1","light-green darken-1","lime darken-1",
+            "yellow darken-1","amber darken-1","orange darken-1","deep-orange darken-1",
+            "brown darken-1","grey darken-1", "blue-grey darken-1"
+        ]
+
+color_df = pd.DataFrame(data=color, columns=['color'])
+
 ALLOWED_EXTENSIONS = {'csv'}
 
 def allowed_file(filename):
@@ -41,11 +51,18 @@ def movie_added():
 
 @app.route('/movies_added')
 def movies_added():
-    # filename = request.args.get('filename')
-    # df_list_movies = pd.read_csv(f'imdb_movie_scraper/uploads/{filename}')
-    # imdb = IMDB(df_list_movies)
+    filename = request.args.get('filename')
+    df_list_movies = pd.read_csv(f'imdb_movie_scraper/uploads/{filename}')
+    imdb = IMDB(df_list_movies)
+    df_movies = pd.read_csv('imdb_movie_scraper/kenny_master_list_no_dupes.csv')
+    # color_choices = RandomColor()
+    color_choices = color_df
+    return render_template('movies_added.html',  df_movies=df_movies, color_choices=color_choices, imdb=imdb, filename=filename)
+
+@app.route('/movies_added_sample')
+def movies_added_sample():
     df_movies = pd.read_csv('imdb_movie_scraper/kenny_master_list_no_dupes_sample.csv')
-    color_choices = RandomColor()
+    color_choices = color_df
     return render_template('movies_added.html',  df_movies=df_movies, color_choices=color_choices) # imdb=imdb, filename=filename,
 
 
